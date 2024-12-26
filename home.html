@@ -153,6 +153,18 @@
         </div>
     </div>
     <div class="row mt-3" >
+        <!-- 下拉框 -->
+        <div class="col-auto d-flex align-items-center">
+            <label for="dropdown" class="col-md-3 form-label mb-0 me-2">付费类型:</label>
+            <select class="form-select " id="payType">
+                <option selected>所有</option>
+                <option value="1">钻石</option>
+                <option value="2">金币</option>
+                <option value="3">免费背包礼物</option>
+                <option value="4">金豆</option>
+                <option value="5">其他</option>
+            </select>
+        </div>
         <!-- 主播名-->
         <div class="col-auto d-flex align-items-center">
             <label for="searchSenderId" class="col-md-3 form-label mb-0 me-2">主播名:</label>
@@ -300,6 +312,9 @@
                         if($('#dropdown').val() !== "所有"){
                             d.activityDesc = $('#dropdown option:selected').text();
                         }
+                        if($('#payType').val() !== "所有"){
+                            d.payType = $('#payType option:selected').text();
+                        }
                         console.log(d)
                         return d; // 将 DataTables 参数转换为 JSON
                     },
@@ -378,13 +393,17 @@
                 const senderName = $('#searchSenderName').val().trim();
                 const anchorName = $('#searchAnchorName').val().trim();
                 let activityDesc = '';
+                let payType = '';
                 if($('#dropdown').val() !== "所有"){
                     activityDesc = $('#dropdown option:selected').text();
+                }
+                if($('#payType').val() !== "所有"){
+                    payType = $('#payType option:selected').text();
                 }
                 const baseUrl1 = baseUrl + '/api/giftlog/export';
                 let fullUrl = baseUrl1 + "?draw=0"  + "&roomId=" + encodeURIComponent(roomId) + "&giftId=" + encodeURIComponent(giftId)+ "&senderId="
                     + encodeURIComponent(senderId) + "&activityDesc=" + encodeURIComponent(activityDesc)+ "&senderName=" + encodeURIComponent(senderName)
-                    + "&anchorName=" + encodeURIComponent(anchorName);
+                    + "&anchorName=" + encodeURIComponent(anchorName)   + "&payType=" + encodeURIComponent(payType);
                 if(startTime){
                     const time1 = new Date(startTime).getTime() / 1000
                     fullUrl = fullUrl + "&startTime=" + encodeURIComponent(time1);
