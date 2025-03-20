@@ -6,6 +6,7 @@
     <title>登录系统</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/global.js"></script>
     <style>
         body {
             display: flex;
@@ -51,7 +52,6 @@
 
 <script>
     $(document).ready(function () {
-        const baseUrl = "http://127.0.0.1:9000"
         $('#loginForm').submit(function (event) {
             event.preventDefault();
 
